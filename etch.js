@@ -1,21 +1,51 @@
 const container = document.getElementById("container");
-
-
+let x  = 16; 
 function createGrid(x){
-    x=16;
-    for (let row=0;row<x;row++){
+    let y = x; 
+    for (let row=0;row<y;row++){
        
-       for(let column=0;column<x;column++){
-           let rows=document.createElement('div');
+       for(let column=0;column<y;column++){
+           const rows=document.createElement('div');
+           rows.setAttribute('class','box');
            container.appendChild(rows);
-            rows.setAttribute('style','border:5px solid black; height:30px; width:30px;');
-         
-       }
-       
-       
-        
+            rows.setAttribute('style','border:1px; height:30px; width:30px;');
+            const square=document.querySelectorAll('.box');
+            square.forEach(box =>{
+                box.addEventListener("mouseover", function addColor(){
+                box.setAttribute('style', 'border:1px; height:30px; width:30px;background-color: black');
+                });
+            });
+        } 
     }
     
 }
+// load function when page loads 
+onload= createGrid(x);
 
-document.getElementById("container").addEventListener("load",createGrid);
+function gridInput(){
+    x = prompt("Please enter the desired number of squares"); 
+    while(x>100){
+        alert("You have surpassed the limit, please input a value less than 100");
+        x = prompt("Please enter the desired number of squares");
+    }
+    createGrid(x);
+}
+
+function changeGridSize(){
+    let num= document.getElementById("container");
+    while(num.hasChildNodes()){
+        num.removeChild(num.firstChild);
+    }
+    //delays prompt
+    setTimeout(gridInput,10);  
+}
+
+//adding eventlistener for button 
+document.getElementById("btn").addEventListener("click",changeGridSize);
+
+
+
+
+
+
+
