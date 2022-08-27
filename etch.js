@@ -8,19 +8,26 @@ function createGrid(x){
            const rows=document.createElement('div');
            rows.setAttribute('class','box');
            container.appendChild(rows);
-            rows.setAttribute('style','border:1px; height:30px; width:30px;');
+           rows.setAttribute('style','border: 1px; height:100%; width:100%;');
             const square=document.querySelectorAll('.box');
             square.forEach(box =>{
                 box.addEventListener("mouseover", function addColor(){
-                box.setAttribute('style', 'border:1px; height:30px; width:30px;background-color: black');
+                    box.setAttribute('style','border: 1px; height:100%; width:100%;background-color: black');
                 });
             });
         } 
     }
-    
+    //dynamically set grid rows and columns 
+container.setAttribute('style','grid-template-columns: repeat(' + x +', auto)');
+
 }
+
+
+
 // load function when page loads 
 onload= createGrid(x);
+
+
 
 function gridInput(){
     x = prompt("Please enter the desired number of squares"); 
@@ -29,6 +36,8 @@ function gridInput(){
         x = prompt("Please enter the desired number of squares");
     }
     createGrid(x);
+    
+    
 }
 
 function changeGridSize(){
